@@ -1,5 +1,7 @@
+// Declaración de funciones a utilizar en el simulador
+
 function validarEdad(age) {
-    while (age < 18) {
+    while (age < 18 || isNaN(age)) {
         alert("No puedes realizar un alquiler hasta ser mayor de edad.")
         age = parseInt(prompt("Ingrese nuevamente su edad."))
     }
@@ -13,89 +15,114 @@ function validarNum(num) {
     return num
 }
 
+function validarOpcion(num) {
+    while (num < 0 || num > 6 || isNaN(num)) {
+        num = parseInt(prompt("Por favor ingrese una opción correcta"))
 
+    }
+    return num
+}
+
+function saludar(name) {
+    alert(`Bienvenid@ ${name}`)
+}
+
+
+//comienza el simulador
 let nameUser = prompt("Ingrese su Usuario")
-console.log(nameUser)
+
+saludar(nameUser)
+
 let ageUser = parseInt(prompt("Ingrese su edad"))
-console.log(ageUser)
-
-
-validarNum(ageUser)
 
 validarEdad(ageUser)
 
-let maqAlquilada = parseInt(prompt(`Qué desea alquilar?
- 1. Herramienta 
- 2. Máquina`))
+console.log(`la edad ingresada es ${ageUser}`)
 
-validarNum(maqAlquilada)
 
-let machine = ("")
+let machine = 0
+let value = 0
+let precio = 0
+let time = 0
 
-switch (maqAlquilada) {
-    case 1:
-        machine = parseInt(prompt(`¿Qué herramienta desea alquilar?
+do {
+    machine = parseInt(prompt(`¿Qué desea alquilar?
+
+    Herramientas
+
     1 - Taladro.
     2 - Soldadora.
-    3 - Cámara termográfica.`))
-        break;
-    case 2:
-        machine = parseInt(prompt(`¿Qué máquina desea alquilar?
-    1 - Grúa.
-    2 - Retroexcavadora.
-    3 - Compactadora.`))
-        break;
-    default:
-        alert("el número ingresado no coincide con una opción");
-        break
-}
+    3 - Cámara termográfica.
 
-console.log(`La opción elegida es ${machine}`)
+    Máquinas
 
-let precio = 0
+    4 - Grúa.
+    5 - Retroexcavadora.
+    6 - Compactadora.
 
-switch (machine) {
-    case 1:
-        precio = 900
-        alert(`El precio del alquiler por dia del taladro es ${precio}`);
-        break;
-    case 2:
-        precio = 1200
-        alert(`El precio del alquiler por dia de la soldadora es ${precio}`);
-        break;
-    case 3:
-        precio = 850
-        alert(`El precio del alquiler por dia de la cámara termografica es ${precio}`);
-        break;
-    case 4:
-        precio = 3100
-        alert(`El precio del alquiler por dia de la grúa es ${precio}`);
-        break;
-    case 5:
-        precio = 2500
-        alert(`El precio del alquiler por dia de la retroexcavadora es ${precio}`);
-        break;
-    case 6:
-        precio = 2000
-        alert(`El precio del alquiler por dia de la compactadora es ${precio}`);
-        break;
-    default:
-        alert("el número ingresado no coincide con una opción");
-        break
-}
+    0 - Ver carrito.`))
 
-console.log(precio)
+    validarOpcion(machine)
 
-let time = prompt("Cuanto días desea alquilarla?")
+    switch (machine) {
+        case 0:
+            if (value == 0) {
+                alert(`Tu carrito está vacio. Agregá algun producto!`)
+                machine = 10
+            } else {
 
-validarNum(time)
+                alert(`Tu carrito tiene un total de $${value} en productos.`)
 
-console.log(time)
+                time = prompt("Cuanto días desea alquilar?")
 
-let calAlquiler = precio * time
+                validarNum(time)
 
-alert(`El precio total del alquiler del producto es ${calAlquiler}.
-Gracias por utilizar nuestro simulador!`)
+                console.log(time)
+
+                let calAlquiler = value * time
+
+                alert(`El precio total del alquiler es $${calAlquiler}.`)
+
+                alert(`Gracias ${nameUser} por utilizar nuestro simulador!`)
+                machine = 0
+            }
+
+            break;
+        case 1:
+            precio = 900
+            value = value + precio
+            alert(`El precio del alquiler por dia del taladro es $${precio} y el total en su carrito es $${value}`);
+            break;
+        case 2:
+            precio = 1200
+            value = value + precio
+            alert(`El precio del alquiler por dia de la soldadora es $${precio} y el total en su carrito es $${value}`);
+            break;
+        case 3:
+            precio = 1000
+            value = value + precio
+            alert(`El precio del alquiler por dia de la cámara termografica es $${precio} y el total en su carrito es $${value}`);
+            break;
+        case 4:
+            precio = 3100
+            value = value + precio
+            alert(`El precio del alquiler por dia de la grúa es $${precio} y el total en su carrito es $${value}`);
+            break;
+        case 5:
+            precio = 2500
+            value = value + precio
+            alert(`El precio del alquiler por dia de la retroexcavadora es $${precio} y el total en su carrito es $${value}`);
+            break;
+        case 6:
+            precio = 2000
+            value = value + precio
+            alert(`El precio del alquiler por dia de la compactadora es $${precio} y el total en su carrito es $${value}`);
+            break;
+        default:
+            alert("el número ingresado no coincide con una opción");
+            break;
+    }
+} while (machine != 0)
 
 
 
