@@ -91,6 +91,21 @@ function filtrarDato(array) {
     }
 }
 
+function ordTitulo(array) {
+    const arrayA = [].concat(array)
+    arrayA.sort((a, b) => {
+        if (a.titulo > b.titulo) {
+            return 1
+        }
+        if (a.titulo < b.titulo) {
+            return -1
+        }
+        return 0
+    })
+
+    verCatalogo(arrayA)
+}
+
 const carrito = []
 
 function agregCarrito(array) {
@@ -220,7 +235,7 @@ do {
             filtrarDato(catalogo)
             break;
         case 4:
-
+            ordTitulo(catalogo)
             break;
         case 5:
             agregCarrito(catalogo)
