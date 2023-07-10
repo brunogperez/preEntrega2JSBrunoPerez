@@ -51,7 +51,7 @@ function verCatalogo(array) {
         newMaqDiv.className = "col-sm-12 col-md-5 col-lg-3 m-3 p-0 "
         newMaqDiv.innerHTML = `<div class="cardProd">
                                 <div id="${maquina.id}" class="image">
-                                    <img src="assets/amoladora.webp">
+                                    <img src="assets/maquina${maquina.id}.webp">
                                 </div>
                                 <div class="details">
                                     <div class="center">
