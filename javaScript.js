@@ -251,9 +251,6 @@ selectOrden.addEventListener("change", () => {
 
 btnCarrito.addEventListener("click", () => {
     cargarCarrito(prodCarrito)
-    if (prodCarrito.length == 0) {
-        divAlquiler.remove()
-    }
 }
 
 )
