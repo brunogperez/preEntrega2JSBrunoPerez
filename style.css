@@ -1,15 +1,19 @@
 body {
-  /* Estilos para el modo claro */
-
-    background-color: #86bbd8 ;
+      background-color: #86bbd8 ;
     font-family: sans-serif;
 }
-header{
+header {
   background-color: #2f4858 ;
 }
-main{
-
-  background-color: #86bbd8
+main {
+  background-color: #86bbd8;
+  padding-bottom: 60px;
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #2f4858 ;
 }
 
 
@@ -18,11 +22,15 @@ body.modo-oscuro {
 }
 
 header.modo-oscuro {
-  background-color: black;
+  background-color: rgb(69, 69, 69);
 }
 
 main.modo-oscuro {
   background-color: #1C4773;
+}
+
+footer.modo-oscuro {
+  background-color: #000000;
 }
 /* 
 #cardProd .details .modo-oscuro{
@@ -36,8 +44,10 @@ background: #ad7c2189;
   justify-content: center;
 }
 
-
-
+.logosMarcas{
+  width: 150px;
+  
+}
 
 #cardProd {
     position: relative;
@@ -47,12 +57,13 @@ background: #ad7c2189;
     width: 300px;
     height: 350px;
     background: 134, 187, 216;
-    
+    border-radius: 10px;
 }
 #cardProd .image {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    border-radius: 10px;
 }
 #cardProd .image img {
     height: 100%;
@@ -69,12 +80,14 @@ background: #ad7c2189;
     left: 0;
     width: 70%;
     height: 100%;
-    background: rgb(255, 107, 28);
+    background: rgb(235, 99, 26);
     transition: .5s;
     transform-origin: left;
     transform: perspective(2000px) rotateY(-90deg);
     border-width: 4px;
     border-color: #000000;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 #cardProd:hover .details {
     transform: perspective(2000px) rotateY(0deg);
@@ -83,7 +96,7 @@ background: #ad7c2189;
 #cardProd .details .center {
     padding: 20px;
     text-align: center;
-    background: #f6ae2d;
+    background: #f6b02d;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -177,3 +190,123 @@ background: #ad7c2189;
 
 
   
+
+
+
+
+
+
+  .search-box {
+    font-size: 20px;
+    border: solid 0.3em #000000;
+    display: inline-block;
+    position: relative;
+    border-radius: 2.5em;
+  }
+  .search-box input[type=text] {
+    font-family: inherit;
+    font-weight: bold;
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0.3em 2.1em 0.3em 0.4em;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 2.5em;
+    transition: width 800ms cubic-bezier(0.68, -0.55, 0.27, 1.55) 150ms;
+  }
+  .search-box input[type=text]:focus {
+    outline: none;
+  }
+  .search-box input[type=text]:focus, .search-box input[type=text]:not(:placeholder-shown) {
+    width: 16em;
+    transition: width 800ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  .search-box input[type=text]:focus + button[type=reset], .search-box input[type=text]:not(:placeholder-shown) + button[type=reset] {
+    transform: rotate(-45deg) translateY(0);
+    transition: transform 150ms ease-out 800ms;
+  }
+  .search-box input[type=text]:focus + button[type=reset]:after, .search-box input[type=text]:not(:placeholder-shown) + button[type=reset]:after {
+    opacity: 1;
+    transition: top 150ms ease-out 950ms, right 150ms ease-out 950ms, opacity 150ms ease 950ms;
+  }
+  .search-box button[type=reset] {
+    background-color: transparent;
+    width: 1.4em;
+    height: 1.4em;
+    border: 0;
+    padding: 0;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0.55em;
+    right: 0.55em;
+    transform: rotate(-45deg) translateY(2.2em);
+    transition: transform 150ms ease-out 150ms;
+  }
+  .search-box button[type=reset]:before, .search-box button[type=reset]:after {
+    content: "";
+    background-color: #000000;
+    width: 0.3em;
+    height: 1.4em;
+    position: absolute;
+  }
+  .search-box button[type=reset]:after {
+    transform: rotate(90deg);
+    opacity: 0;
+    transition: transform 150ms ease-out, opacity 150ms ease-out;
+  }
+
+
+
+
+  :root{
+    --bs-dark: #212529;
+  }
+  
+  .theme-container {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+  }
+  
+  .theme-container:hover {
+    opacity: 0.8;
+  }
+  
+  .shadow-dark {
+    background: linear-gradient(145deg, #23282c, #1e2125);
+    box-shadow: 17px 17px 23px #1a1d20,
+      -17px -17px 23px #282d32, inset 5px 5px 4px #1e2226,
+      inset -5px -5px 4px #24282c;
+  }
+  
+  .shadow-light {
+    box-shadow: 7px 7px 15px -10px #bbcfda, -4px -4px 13px #ffffff,
+      inset 7px 7px 3px rgba(209, 217, 230, 0.35),
+      inset -11px -11px 3px rgba(255, 255, 255, 0.3)
+  }
+  
+  @keyframes change {
+    0% {
+      transform: scale(1);
+    }
+  
+    100% {
+      transform: scale(1.4);
+    }
+  }
+  
+  .change {
+    animation-name: change;
+    animation-duration: 1s;
+    animation-direction: alternate;
+  }

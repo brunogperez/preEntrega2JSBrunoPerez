@@ -1,11 +1,6 @@
-//DOM con array de objetos.
 
-//creación del array de máquinas y herramientas
-const catalogo = []
-const catalogoVacio = []
 
-catalogo.push(maquina1, maquina2, maquina3, maquina4, maquina5, maquina6, maquina7, maquina8, maquina9, maquina10,
-    maquina11, maquina12, maquina13, maquina14, maquina15, maquina16, maquina17, maquina18, maquina19)
+cargarProductos ()
 
 
 //array con productos en carrito
@@ -16,7 +11,6 @@ if (localStorage.getItem("carrito")) {
         prodCarrito.push(catalogoStorage)
     }
 } else {
-    //no existe nada en el storage
     prodCarrito = []
     localStorage.setItem("carrito", prodCarrito)
 }
@@ -32,8 +26,18 @@ let modalBodyCarrito = document.getElementById("modal-bodyCarrito");
 let precioTotal = document.getElementById("precioTotal");
 let btnCalAlquiler = document.getElementById("btnAlquiler");
 let totalFinal = document.getElementById("totalFinal");
-let botonFinalizarCompra = document.getElementById ("botonFinalizarCompra")
+let botonFinalizarCompra = document.getElementById("botonFinalizarCompra")
+let buscador = document.getElementById("searchBox")
+let search = document.getElementById("search")
+let btnSearch = document.getElementById("btnSearch")
+let loader = document.getElementById("loader")
 
+let fecha = document.getElementById("fecha")
+const DateTime = luxon.DateTime
+setInterval(() => {
+    let dateNow = DateTime.now()
+    fecha.innerHTML = `${dateNow.toLocaleString(DateTime.DATETIME_MED)}`
+}, 1000);
 
 //FUNCIONES
 
@@ -62,23 +66,14 @@ function verCatalogo(array) {
         let addBtn = document.getElementById(`addBtn${maquina.id}`)
 
         addBtn.addEventListener("click", () => {
-            addCarrito(maquina)
+            addCarrito(maquina);
+            Toastify({
+                text: `El producto ha sido agregado al carrito!`,
+                duration: 1500,
+                gravity: "bottom",
+                position: "center"
+            }).showToast()
         })
-    }
-}
-
-function validarEdad(edad) {
-    if (edad < 18) {
-        console.log("Eres menor de edad")
-
-
-/* Funcion para bloquear la pagina por ser menor de Edad */
-
-
-
-
-
-
     }
 }
 
@@ -90,7 +85,7 @@ function ordMenorMayor(array) {
 
 function ordMayorMenor(array) {
     const mayorMenor = [].concat(array)
-    mayorMenor.sort((elem1, elem2) => elem2.precio - elem1.precio)
+    mayorMenor.sort((a, b) => b.precio - a.precio)
     verCatalogo(mayorMenor)
 }
 
@@ -111,19 +106,18 @@ function ordNombre(array) {
 
 function addCarrito(maquina) {
 
-    let maquinaCarrito = prodCarrito.find((elem) => elem.id == maquina.id)
-    if (maquinaCarrito == undefined) {
-        //código para sumar al array carrito
-        prodCarrito.push(maquina)
-        localStorage.setItem("carrito", JSON.stringify(prodCarrito))
-    }
+    let maqCarrito = prodCarrito.find((elem) => elem.id == maquina.id)
+
+    maqCarrito == undefined && (prodCarrito.push(maquina),
+        localStorage.setItem("carrito", JSON.stringify(prodCarrito)))
 }
 
-function cargarCarrito(array){
+
+function cargarCarrito(array) {
     modalBodyCarrito.innerHTML = ``
     //primer for each imprime las card
-    array.forEach((productoCarrito)=>{
-       modalBodyCarrito.innerHTML += `
+    array.forEach((productoCarrito) => {
+        modalBodyCarrito.innerHTML += `
        <div class="card border-primary m-2 w-75 text-center" id ="productoCarrito${productoCarrito.id}">
                 <div class="card-body">
                        <h4 class="card-title">${productoCarrito.nombre}</h4>
@@ -139,105 +133,100 @@ function cargarCarrito(array){
     })
     //segundo for each adjunta EVENTOS eliminar
     array.forEach((productoCarrito) => {
-       document.getElementById(`botonSumarUnidad${productoCarrito.id}`).addEventListener("click", () =>{
-          //utilizo método creado en la class constructora
-          productoCarrito.sumarUnidad()
-          //setear el storage
-          localStorage.setItem("carrito", JSON.stringify(array))
-          //para actualizar el DOM re imprimimos todo
-          cargarCarrito(array)
-       })
-       //EVENTO PARA RESTAR UNA UNIDAD
-       document.getElementById(`botonEliminarUnidad${productoCarrito.id}`).addEventListener("click", ()=>{
-          let cantProd = productoCarrito.restarUnidad()
+        document.getElementById(`botonSumarUnidad${productoCarrito.id}`).addEventListener("click", (event) => {
+            //utilizo método creado en la class constructora
+            event.preventDefault()
+            productoCarrito.sumarUnidad()
+            //setear el storage
+            localStorage.setItem("carrito", JSON.stringify(array))
+            //para actualizar el DOM re imprimimos todo
+            cargarCarrito(array)
+        })
+        //EVENTO PARA RESTAR UNA UNIDAD
+        document.getElementById(`botonEliminarUnidad${productoCarrito.id}`).addEventListener("click", () => {
+            let cantProd = productoCarrito.restarUnidad()
 
-          if(cantProd < 1){
-             //borrar del DOM
-             let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
-             cardProducto.remove()
-             //borrar del array
-             //encontramos objeto a eliminar
-             let elimProd = array.find((maquina) => maquina.id == productoCarrito.id)
-             //buscar indice
-             let posicion = array.indexOf(elimProd)
-             array.splice(posicion,1)
-             //setear storage
-             localStorage.setItem("carrito", JSON.stringify(array))
- 
-             calcularTotal(array)
-             }
-             else{
-                 localStorage.setItem("carrito", JSON.stringify(array))
-             }
-          
-          cargarCarrito(array)
-       })
- 
-      document.getElementById(`botonEliminar${productoCarrito.id}`).addEventListener("click", () => {
-        let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
-        cardProducto.remove()
-        let elimProd = array.find((libro) => libro.id == productoCarrito.id)
-        let posicion = array.indexOf(elimProd)
-        array.splice(posicion,1)
-        console.log(array)
-        localStorage.setItem("carrito", JSON.stringify(array))
+            if (cantProd < 1) {
+                let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
+                cardProducto.remove()
+                let elimProd = array.find((maquina) => maquina.id == productoCarrito.id)
+                let posicion = array.indexOf(elimProd)
+                array.splice(posicion, 1)
+                localStorage.setItem("carrito", JSON.stringify(array))
+                calcularTotal(array)
+            }
+            else {
+                localStorage.setItem("carrito", JSON.stringify(array))
+            }
 
-        calcularTotal(array)
-     })
-  })
-  calcularTotal(array)
+            cargarCarrito(array)
+        })
+
+        document.getElementById(`botonEliminar${productoCarrito.id}`).addEventListener("click", () => {
+            let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
+            cardProducto.remove()
+            let elimProd = array.find((libro) => libro.id == productoCarrito.id)
+            let posicion = array.indexOf(elimProd)
+            array.splice(posicion, 1)
+            localStorage.setItem("carrito", JSON.stringify(array))
+
+            calcularTotal(array)
+        })
+    })
+    calcularTotal(array)
 }
 
+function calcularTotal(array) {
 
-function calcularTotal(array){
-    //método reduce 
-    //DOS PARAMETROS: primero la function y segundo valor en el que quiero inicializar el acumulador
-    let total = array.reduce((acc, productoCarrito)=> acc + (productoCarrito.precio * productoCarrito.cantidad), 0)
-    
-    total == 0 ? precioTotal.innerHTML= `No hay productos en el carrito` : precioTotal.innerHTML = `El total es $<strong>${total}</strong>`
- 
- }
+    let total = array.reduce((acc, productoCarrito) => acc + (productoCarrito.precio * productoCarrito.cantidad), 0)
 
-function calcularAlquiler (array){
+    total == 0 ? precioTotal.innerHTML = `<p>No hay productos en el carrito</p>` : precioTotal.innerHTML = `<p>El total es $<strong>${total}</strong></p>`
+}
+
+function calcularAlquiler(array) {
     let input = parseFloat(document.getElementById("datoAlquiler").value);
-    let total = array.reduce((acc, productoCarrito)=> acc + (productoCarrito.precio * productoCarrito.cantidad), 0)
+    let total = array.reduce((acc, productoCarrito) => acc + (productoCarrito.precio * productoCarrito.cantidad), 0)
 
     let totalFinal = parseFloat(total) * parseFloat(input);
-    
+
     let resultadoHTML = `<p>El total de su alquiler es $${totalFinal}</p>`;
     document.getElementById("totalFinal").innerHTML = resultadoHTML;
-
-    console.log(totalFinal)
 }
+
+function searchBox(inputSearch, array) {
+    let search = array.filter(
+        (dato => dato.categoria.toLowerCase().includes(inputSearch.toLowerCase()) || dato.nombre.toLowerCase().includes(inputSearch.toLowerCase()))
+    )
+    search.length == 0 ? (searchDiv.innerHTML = `<h4> NO existen coincidencias </h4>`, verCatalogo(search)) :
+        (searchDiv.innerHTML = ``, verCatalogo(search))
+}
+
 
 
 //EVENTOS
 
-
 document.addEventListener("DOMContentLoaded", () => {
-    // Comprueba si se ha mostrado el modal antes
     if (modalMostrado == null) {
-        // Si no se ha mostrado antes y la edad no esta seteada, mostrar el modal
         let modal = document.getElementById("miModal");
         modal.style.display = "block";
-        // Cierra el modal al hacer clic en el botón de cerrar 
         let cerrarModal = document.getElementById("cerrarModal");
         cerrarModal.addEventListener("click", function () {
             modal.style.display = "none";
         });
     }
-    verCatalogo(catalogo)
+
+    setTimeout(() => {
+        loader.remove()
+        verCatalogo(catalogo)
+    }, 2000)
+
 });
-
-
 
 guardarEdad.addEventListener("click", () => {
     let modal = document.getElementById("miModal");
     const edad = document.getElementById("validarEdad").value;
     if (edad.trim() != "") {
         localStorage.setItem("edad", edad);
-        validarEdad(edad)
-        // Marca el modal como mostrado para evitar que se abra nuevamente
         localStorage.setItem("modalMostrado", "true");
         modal.style.display = "none";
     }
@@ -261,19 +250,18 @@ selectOrden.addEventListener("change", () => {
     }
 })
 
-btnCarrito.addEventListener("click", () =>{
+btnCarrito.addEventListener("click", () => {
     cargarCarrito(prodCarrito)
 })
 
-btnAlquiler.addEventListener("click", () =>{
+btnAlquiler.addEventListener("click", () => {
     let input = document.getElementById("datoAlquiler");
     localStorage.setItem("dias", input);
-    
+
     calcularAlquiler(prodCarrito)
+})
 
-} )
-
-botonFinalizarCompra.addEventListener("click", ()=>{
+botonFinalizarCompra.addEventListener("click", () => {
     Swal.fire({
         title: `Su pedido ha sido realizado`,
         icon: "info",
@@ -281,4 +269,18 @@ botonFinalizarCompra.addEventListener("click", ()=>{
         showConfirmButton: false,
     })
 
+})
+
+buscador.addEventListener("input", () => {
+    searchBox(buscador.value, catalogo)
+})
+buscador.addEventListener('keydown', (event) => {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+    }
+})
+
+btnSearch.addEventListener("click", () => {
+    searchDiv.innerHTML = ``,
+        verCatalogo(catalogo)
 })

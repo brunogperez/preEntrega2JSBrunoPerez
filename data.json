@@ -1,0 +1,135 @@
+[
+    {
+        "id": 1,
+        "categoria": "Maquinaria Pesada",
+        "nombre": "Excavadora",
+        "precio": 5200,
+        "cantidad": 1
+    },
+    {
+        "id": 2,
+        "categoria": "Maquinaria Pesada",
+        "nombre": "Grúa",
+        "precio": 4800,
+        "cantidad": 1
+    },
+    {
+        "id": 3,
+        "categoria": "Maquinaria Pesada",
+        "nombre": "Cargadora Frontal",
+        "precio": 4600,
+        "cantidad": 1
+    },
+    {
+        "id": 4,
+        "categoria": "Maquinaria Pesada",
+        "nombre": "Retroexcavadora",
+        "precio": 4700,
+        "cantidad": 1
+    },
+    {
+        "id": 5,
+        "categoria": "Maquinaria Pesada",
+        "nombre": "Compactadora",
+        "precio": 4000,
+        "cantidad": 1
+    },
+    {
+        "id": 6,
+        "categoria": "Maquinaria Pesada",
+        "nombre": "Dumper",
+        "precio": 4000,
+        "cantidad": 1
+    },
+    {
+        "id": 7,
+        "categoria": "Herramienta de construcción",
+        "nombre": "Martillo demoledor",
+        "precio": 1200,
+        "cantidad": 1
+    },
+    {
+        "id": 8,
+        "categoria": "Herramienta de construcción",
+        "nombre": "Sierra circular",
+        "precio": 800,
+        "cantidad": 1
+    },
+    {
+        "id": 9,
+        "categoria": "Herramienta de construcción",
+        "nombre": "Taladro",
+        "precio": 600,
+        "cantidad": 1
+    },
+    {
+        "id": 10,
+        "categoria": "Herramienta de construcción",
+        "nombre": "Amoladora",
+        "precio": 500,
+        "cantidad": 1
+    },
+    {
+        "id": 11,
+        "categoria": "Herramienta de construcción",
+        "nombre": "Mezcladora de concreto",
+        "precio": 1000,
+        "cantidad": 1
+    },
+    {
+        "id": 12,
+        "categoria": "Herramienta de construcción",
+        "nombre": "Nivel láser",
+        "precio": 450,
+        "cantidad": 1
+    },
+    {
+        "id": 13,
+        "categoria": "Equipo de soldadura",
+        "nombre": "Soldadora eléctrica",
+        "precio": 1500,
+        "cantidad": 1
+    },
+    {
+        "id": 14,
+        "categoria": "Equipo de soldadura",
+        "nombre": "Soldadora de arco",
+        "precio": 1200,
+        "cantidad": 1
+    },
+    {
+        "id": 15,
+        "categoria": "Equipo de soldadura" ,
+        "nombre": "Soldadora de gas",
+        "precio": 1300,
+        "cantidad": 1
+    },
+    {
+        "id": 16,
+        "categoria": "Equipo de soldadura" ,
+        "nombre": "Equipo de soldadura por punto",
+        "precio": 1700,
+        "cantidad": 1
+    },
+    {
+        "id": 17,
+        "categoria": "Equipo de energía" ,
+        "nombre": "Generador eléctrico",
+        "precio": 3000,
+        "cantidad": 1
+    },
+    {
+        "id": 18,
+        "categoria": "Equipo de energía" ,
+        "nombre": "Torre de iluminación",
+        "precio": 2000,
+        "cantidad": 1
+    },
+    {
+        "id": 19,
+        "categoria": "Equipo de energía" ,
+        "nombre": "Compresor de aire",
+        "precio": 2100,
+        "cantidad": 1
+    }
+]

@@ -1,24 +1,24 @@
 //class constructora
 class Maquina {
     constructor(id, categoria, nombre, precio) {
-            this.id = id,
+        this.id = id,
             this.categoria = categoria,
             this.nombre = nombre,
             this.precio = precio,
             this.cantidad = 1
     }
 
-    sumarUnidad(){
+    sumarUnidad() {
         this.cantidad = this.cantidad + 1
         return this.cantidad
     }
-    restarUnidad(){
+    restarUnidad() {
         this.cantidad = this.cantidad - 1
         return this.cantidad
     }
- }
+}
 
-
+/* 
 const maquina1 = new Maquina(1, "Maquinaria Pesada", "Excavadora", 5200)
 const maquina2 = new Maquina(2, "Maquinaria Pesada", "Grúa", 4800)
 const maquina3 = new Maquina(3, "Maquinaria Pesada", "Cargadora frontal", 4600)
@@ -38,5 +38,24 @@ const maquina16 = new Maquina(16, "Equipo de soldadura", "Equipo de soldadura po
 const maquina17 = new Maquina(17, "Equipo de energía", "Generador eléctrico", 3000)
 const maquina18 = new Maquina(18, "Equipo de energía", "Torre de iluminación", 2000)
 const maquina19 = new Maquina(19, "Equipo de energía", "Compresor de aire", 2100)
+ */
 
+let catalogo = []
+const catalogoVacio = []
 
+const cargarProductos = async () => {
+    const res = await fetch("data.json")
+    const data = await res.json()
+
+    for (let maquina of data) {
+        let prodData = new Maquina(maquina.id, maquina.categoria, maquina.nombre, maquina.precio, maquina.cantidad)
+        catalogo.push(prodData)
+    }
+    localStorage.setItem("catalogo", JSON.stringify(catalogo))
+}
+
+if(localStorage.getItem("catalogo")){
+    estanteria = JSON.parse(localStorage.getItem("catalogo"))
+}else{
+    cargarProductos()
+}
