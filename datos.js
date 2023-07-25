@@ -48,14 +48,8 @@ const cargarProductos = async () => {
     const data = await res.json()
 
     for (let maquina of data) {
-        let prodData = new Maquina(maquina.id, maquina.categoria, maquina.nombre, maquina.precio, maquina.cantidad)
+        let prodData = new Maquina (maquina.id, maquina.categoria, maquina.nombre, maquina.precio, maquina.cantidad)
         catalogo.push(prodData)
     }
     localStorage.setItem("catalogo", JSON.stringify(catalogo))
 }
-
-/* if(localStorage.getItem("catalogo")){
-    estanteria = JSON.parse(localStorage.getItem("catalogo"))
-}else{
-    cargarProductos()
-} */

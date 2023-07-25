@@ -29,48 +29,33 @@
 <body>
 
   <!-- modal carrito -->
-  <div class="modal fade" id="idModalCarrito" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    tabindex="-1">
+
+  <div class="modal fade" tabindex="-1" id="idModalCarrito">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <p class="modal-title">Carrito</p>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="modal-bodyCarrito"></div>
-        <div class="py-3">
-          <div class="text-center" id="precioTotal"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar Carrito</button>
-          <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
-            data-bs-toggle="modal">Continuar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Calculo</h1>
+          <h5 class="modal-title">Carrito</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Ingrese la cantidad de días que desea alquilar.
-
-          <div class="mb-3">
+          <div class="modal-body" id="modal-bodyCarrito"></div>
+          <div class="py-3">
+            <div class="text-center" id="precioTotal"></div>
+          </div>
+          <div class="mb-3" id="divAlquiler">
+            <p class="text-center">Ingrese la cantidad de días que desea alquilar.</p>
             <input id="datoAlquiler" type="number" class="form-control" placeholder="" aria-label="Recipient's username"
               aria-describedby="button-addon2"><br>
-            <button class="btn btn-outline-secondary" type="button" id="btnAlquiler">Calcular</button>
+            <div class="text-center">
+              <button class="btn btn-outline-secondary" type="button" id="btnAlquiler">Calcular</button>
+            </div>
             <div>
               <p id="totalFinal" class="py-2"></p>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#idModalCarrito" data-bs-toggle="modal">Volver atrás</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar Carrito</button>
           <button type="button" data-bs-dismiss="modal" class="btn btn-success" id="botonFinalizarCompra">Finalizar
             pedido</button>
         </div>
@@ -156,15 +141,15 @@
 
   <main class="container-fluid ">
     <section class="container-fluid">
-<div class="bg-dark row justify-content-center">
-  <img class="logosMarcas" src="marcas/bosch.png" alt="logo de bosch">
-  <img class="logosMarcas" src="marcas/cat.png" alt="logo de cat">
-  <img class="logosMarcas" src="marcas/dogo.png" alt="logo de soldadoras dogo">
-  <img class="logosMarcas" src="marcas/kipor.webp" alt="logo de maquinas kipor">
-  <img class="logosMarcas" src="marcas/la-ser.webp" alt="logo de soldadoras la-ser">
-  <img class="logosMarcas" src="marcas/makita.png" alt="logo de herramientas makita">
-  <img class="logosMarcas" src="marcas/xcmg.png" alt="logo de maquinas xcmg">
-</div>
+      <div class="bg-dark row justify-content-center">
+        <img class="logosMarcas" src="marcas/bosch.png" alt="logo de bosch">
+        <img class="logosMarcas" src="marcas/cat.png" alt="logo de cat">
+        <img class="logosMarcas" src="marcas/dogo.png" alt="logo de soldadoras dogo">
+        <img class="logosMarcas" src="marcas/kipor.webp" alt="logo de maquinas kipor">
+        <img class="logosMarcas" src="marcas/la-ser.webp" alt="logo de soldadoras la-ser">
+        <img class="logosMarcas" src="marcas/makita.png" alt="logo de herramientas makita">
+        <img class="logosMarcas" src="marcas/xcmg.png" alt="logo de maquinas xcmg">
+      </div>
       <div id="fecha" class="text-right my-3"></div>
       <div class="text-center">
         <h1 class="strong">
@@ -173,9 +158,11 @@
         <hr>
         <p>
           En ByC Ingeniería, nos enorgullecemos de ofrecerte la solución perfecta para tus necesidades de maquinarias.
-          Ya sea que estés buscando equipos industriales, herramientas o maquinaria especializada, ¡estamos aquí para ayudarte!
+          Ya sea que estés buscando equipos industriales, herramientas o maquinaria especializada, ¡estamos aquí para
+          ayudarte!
         </p>
       </div>
+
       <div class="text-center my-2">
         <form class="search-box">
           <input id="searchBox" type="text" placeholder="" />

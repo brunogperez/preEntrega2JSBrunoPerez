@@ -1,15 +1,13 @@
 
 
-cargarProductos ()
+cargarProductos()
 
 
 //array con productos en carrito
 let prodCarrito = [];
 if (localStorage.getItem("carrito")) {
-    for (let maquina of JSON.parse(localStorage.getItem("carrito"))) {
-        let catalogoStorage = new Maquina(maquina.id, maquina.categoria, maquina.nombre, maquina.precio, maquina.imagen)
-        prodCarrito.push(catalogoStorage)
-    }
+    prodCarrito = JSON.parse(localStorage.getItem("carrito"))
+
 } else {
     prodCarrito = []
     localStorage.setItem("carrito", prodCarrito)
@@ -31,6 +29,7 @@ let buscador = document.getElementById("searchBox")
 let search = document.getElementById("search")
 let btnSearch = document.getElementById("btnSearch")
 let loader = document.getElementById("loader")
+let divAlquiler = document.getElementById("divAlquiler")
 
 let fecha = document.getElementById("fecha")
 const DateTime = luxon.DateTime
@@ -252,16 +251,24 @@ selectOrden.addEventListener("change", () => {
 
 btnCarrito.addEventListener("click", () => {
     cargarCarrito(prodCarrito)
-})
+    if (prodCarrito.length == 0) {
+        divAlquiler.remove()
+    }
+}
+
+)
 
 btnAlquiler.addEventListener("click", () => {
+
     let input = document.getElementById("datoAlquiler");
     localStorage.setItem("dias", input);
 
     calcularAlquiler(prodCarrito)
+
 })
 
 botonFinalizarCompra.addEventListener("click", () => {
+
     Swal.fire({
         title: `Su pedido ha sido realizado`,
         icon: "info",
