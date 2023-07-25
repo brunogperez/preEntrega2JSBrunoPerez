@@ -54,8 +54,8 @@ const cargarProductos = async () => {
     localStorage.setItem("catalogo", JSON.stringify(catalogo))
 }
 
-if(localStorage.getItem("catalogo")){
+/* if(localStorage.getItem("catalogo")){
     estanteria = JSON.parse(localStorage.getItem("catalogo"))
 }else{
     cargarProductos()
-}
+} */
